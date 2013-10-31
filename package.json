@@ -1,0 +1,17 @@
+{
+	"name": "nwd_nodejs",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"start": "node app"
+	},
+	"dependencies": {
+		"async": "*",
+		"cheerio": "*",
+		"jsdom": "*",
+		"mkdirp": "*",
+		"request": "*",
+		"restler": "*",
+		"underscore.string": "*"
+	}
+}
