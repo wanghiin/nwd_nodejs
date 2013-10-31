@@ -1,6 +1,10 @@
 var restler = require('restler')
     , _s = require('underscore.string');
 
+process.on('uncaughtException', function (err) {
+  console.log(err);
+})
+
 //var webtoonId = process.argv[2];
 var webtoonId = "471283";
 
