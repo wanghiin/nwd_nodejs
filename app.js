@@ -54,13 +54,14 @@ function makeEpisodeDownloader(titleId, pageUrl) {
 
       var workers = [];
       $('.wt_viewer img').each(function (idx, el) {
-        var fileName = _s.sprintf("%04d", titleId) + '_' + episodeName.replace(' ', '_') + "_" + _s.sprintf("%04d", idx) + ".jpg";
+        // windows 에서 허용하지 않는 문자 제거.
+        var fileName = _s.sprintf("%04d", titleId) + '_' + episodeName.replace(' ', '_').replace(/[/:*?\\"<>|]/, '') + "_" + _s.sprintf("%04d", idx) + ".jpg";
         workers.push(makeImagesDownloader({uri: el.attribs.src, headers: {'Referer': pageUrl}}, fileName));
       });
       require('async').series(workers,
           function (err) {
             if (!err) {
-              callback(); // next 함수 호출.
+              callback(); // next downloader가 실행됨.
             }
           });
 
@@ -71,7 +72,7 @@ function makeEpisodeDownloader(titleId, pageUrl) {
 function makeImagesDownloader(options, filename) {
   return function (callback) {
     var writeStream = require('fs').createWriteStream(webtoonId + '/' + filename);
-    new require('request')(options).pipe(writeStream).on('close', callback);
+    new require('request')(options).pipe(writeStream).on('close', callback); // download가 완료되면 다음 downloader가 실행됨.
   }
 };
 
