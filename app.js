@@ -5,8 +5,8 @@ process.on('uncaughtException', function (err) {
   console.log(err);
 })
 
-//var webtoonId = process.argv[2];
-var webtoonId = "471283";
+var webtoonId = process.argv[2];
+//var webtoonId = "471283";
 
 restler.get('http://comic.naver.com/webtoon/list.nhn?titleId=' + webtoonId).once('complete', function (mainHtml) {
   // 마지막 에피소드를 알아내기 위해 html을 다운로드 합니다.
