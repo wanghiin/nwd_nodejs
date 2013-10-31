@@ -55,7 +55,7 @@ function makeEpisodeDownloader(titleId, pageUrl) {
       var workers = [];
       $('.wt_viewer img').each(function (idx, el) {
         // windows 에서 허용하지 않는 문자 제거.
-        var fileName = _s.sprintf("%04d", titleId) + '_' + episodeName.replace(' ', '_').replace(/[/:*?\\"<>|]/, '') + "_" + _s.sprintf("%04d", idx) + ".jpg";
+        var fileName = _s.sprintf("%04d", titleId) + '_' + episodeName.replace(' ', '_').replace(/[/:*?\\"<>|]/gi, '') + "_" + _s.sprintf("%04d", idx) + ".jpg";
         workers.push(makeImagesDownloader({uri: el.attribs.src, headers: {'Referer': pageUrl}}, fileName));
       });
       require('async').series(workers,
